@@ -5,7 +5,7 @@ export type ProductProps = {
 }
 
 export type CartItemProps = {
-  product: object;
+  product: ProductProps;
   quantity: number;
 }
 

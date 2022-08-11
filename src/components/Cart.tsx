@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
+import { StateProps } from "../store";
+import { CartItemProps } from "../store/modules/cart/types";
 
 const Cart = () => {
-  const state = useSelector(state => state);
-  console.log("🚀 ~ file: Cart.tsx ~ line 5 ~ Cart ~ state", state)
+  const cart = useSelector<StateProps, CartItemProps[]>(state => state.cart.items);
 
   return (
     <table>
@@ -15,7 +16,16 @@ const Cart = () => {
         </tr>
       </thead>
       <tbody>
-
+        {cart.map(item => (
+          <tr
+            key={item.product.id}
+          >
+            <td>{item.product.title}</td>
+            <td>{item.product.price}</td>
+            <td>{item.quantity}</td>
+            <td>{(item.product.price * item.quantity).toFixed(2)}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   )
